@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:flare_flutter/flare_actor.dart';
 class Test extends StatefulWidget
 {
   @override
@@ -40,7 +40,7 @@ class Test extends StatefulWidget
    var displayPicture = user.photoUrl; 
     Navigator.pushReplacement(context,
       MaterialPageRoute(
-        builder: (BuildContext) => HomeScreen(
+        builder: (BuildContext context) => HomeScreen(
           name: name,
           email: email,
           displaypicURL: displayPicture,
@@ -55,7 +55,13 @@ class Test extends StatefulWidget
   
   Widget signInButton(){
     return new Container(
+  
+
       child: new RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14.0)
+        ),
+color: Colors.blue,
         onPressed: () async {
           var user = await signInWithGoogle();
           var name = user.displayName;
@@ -75,7 +81,41 @@ class Test extends StatefulWidget
             )
           );
         },
-        child: Text('Sign in with Google'),
+        child: Container(
+       color: Colors.blue,
+
+          height:50,
+          width:190,
+          child: Form(
+            child: Row(
+              
+              children: <Widget>[
+                
+                Container(
+                 
+                  padding: EdgeInsets.only(left: 10.0),
+                                  child: Text('Sign with',
+                  
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                  
+                  ),
+                ),
+                
+                   Container(
+                       padding: EdgeInsets.only(left: 49.0),
+                     child: Image.asset("assets/google_logo.png",
+                       
+                       ),
+                     ),
+                
+
+              ],
+            ),
+          )
+        ),
       ),
     );
   }
@@ -88,24 +128,35 @@ void initState()
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-      
-      appBar: AppBar(
-        title: Text(
-          'Sign In'
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
+
+       body: Center(
+        
+        
+        child: Container(
           child: Column(
             children: <Widget>[
-              signInButton(),
-            ],
+              Container(
+                 
+        
+          height: MediaQuery.of(context).size.height/1.2,
+          width: MediaQuery.of(context).size.width/1.5,
+          child: FlareActor(
+            "assets/searching.flr",
+            animation: "walking",
+            fit: BoxFit.cover,
           ),
+
+              ),
+             signInButton()
+            ],
+         
         ),
       ),
+       )
     );
+
+    
     
   }
 }
