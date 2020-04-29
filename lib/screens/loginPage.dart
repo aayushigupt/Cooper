@@ -6,7 +6,7 @@ import 'home.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 class Test extends StatefulWidget
 {
   @override
@@ -101,10 +101,15 @@ void getUID() async{
         },
       child: Row(
         children: <Widget>[
+          SizedBox(width:5.0),
           Icon(FontAwesomeIcons.google, color: Color(0xffCE107C),),
           SizedBox(width: 21.0,),
           
-          Text('Sign in with Google',style: TextStyle(color: Colors.black,fontSize: 15.0)
+          Text('Sign in with Google',
+          style: GoogleFonts.roboto(
+            color: Colors.black,
+            fontSize: 15.0,
+          ),
         
           )
         ]

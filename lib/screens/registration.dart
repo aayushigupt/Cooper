@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_storage/firebase_storage.dart';
 import 'package:testing/screens/check.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 class Register extends StatefulWidget
 {
   @override
@@ -37,7 +38,7 @@ Widget affect()
     child: TextFormField(
       controller: affectController,
       decoration: InputDecoration(
-        labelText: 'Most Affected Thing'
+        labelText: 'Presence of Most Affected Thing'
       ),
     ),
   );
@@ -105,14 +106,17 @@ void initState()
       floatingActionButton: FloatingActionButton(
         onPressed: ()async{
           var collectionRef = Firestore.instance.collection("detail");
+          FirebaseUser user = await FirebaseAuth.instance.currentUser();
           Map<String, dynamic> detail = {
             "solution": solutionController.text,
             "affect": affectController.text,
             "problems": problemController.text,
             "comment": commentController.text,
+            "uid": user.uid,
           };
           
           await collectionRef.add(detail);
+          
           Navigator.push(context, MaterialPageRoute(
             builder: (BuildContext)=> Check(),
           ));
