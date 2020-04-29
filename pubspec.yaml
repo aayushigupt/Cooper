@@ -20,6 +20,11 @@ dependencies:
   rxdart: ^0.22.0
   geolocator: any
   flare_flutter: any
+  flutter_emoji: ">= 2.0.0"
+  demoji: ^1.0.1
+  google_fonts: ^1.0.0
+  font_awesome_flutter: ^8.8.1
+
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +39,4 @@ flutter:
     - assets/searching.flr
     - assets/Checkbox.flr
     - assets/Giftbox.flr
+    - assets/Success Check.flr

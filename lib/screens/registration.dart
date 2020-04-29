@@ -10,34 +10,34 @@ class Register extends StatefulWidget
 
 class _RegisterState extends State<Register> {
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController aadharController = TextEditingController();
+  TextEditingController solutionController = TextEditingController();
+  TextEditingController affectController = TextEditingController();
   TextEditingController problemController = TextEditingController();
   TextEditingController commentController = TextEditingController();
 
-Widget name()
+Widget solution()
 {
 
   return Container(
     width: 430,
     child: TextFormField(
-      controller: nameController,
+      controller: solutionController,
       decoration: InputDecoration(
-        labelText: 'Full Name',
-
+        labelText: 'Solution',
+        hintText: 'Any solution if you can suggest!!'
       ),
     ),
   );
 }
 
-Widget aadhar()
+Widget affect()
 {
   return Container(
     width: 430,
     child: TextFormField(
-      controller: aadharController,
+      controller: affectController,
       decoration: InputDecoration(
-        labelText: 'Aadhar Card Number'
+        labelText: 'Most Affected Thing'
       ),
     ),
   );
@@ -80,7 +80,7 @@ void initState()
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.pink[600],
         title: Text('Registeration'),
       ),
       body: SingleChildScrollView(
@@ -89,13 +89,13 @@ void initState()
           child: Form(
             child: Column(
               children: <Widget>[
-                SizedBox(height: 50.0,),
-                name(),
-                SizedBox(height: 40.0,),
-                aadhar(),
-                SizedBox(height: 40.0,),
+                SizedBox(height: 60.0,),
                 problem(),
-                SizedBox(height: 40.0,),
+                SizedBox(height: 50.0,),
+                affect(),
+                SizedBox(height: 50.0,),
+                solution(),
+                SizedBox(height: 50.0,),
                 comment(),
               ],
             ),
@@ -106,17 +106,18 @@ void initState()
         onPressed: ()async{
           var collectionRef = Firestore.instance.collection("detail");
           Map<String, dynamic> detail = {
-            "name": nameController.text,
-            "aadhar": aadharController.text,
+            "solution": solutionController.text,
+            "affect": affectController.text,
             "problems": problemController.text,
             "comment": commentController.text,
           };
+          
           await collectionRef.add(detail);
           Navigator.push(context, MaterialPageRoute(
             builder: (BuildContext)=> Check(),
           ));
         },
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.pink[600],
         child: Icon(Icons.done),
       ),
     );

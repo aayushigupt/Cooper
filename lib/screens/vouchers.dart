@@ -8,6 +8,7 @@ class Voucher extends StatelessWidget
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pink[600],
         title: Text('Vouchers',
        style: TextStyle(
          

@@ -88,7 +88,7 @@ drawer: Drawer(
            height: 10.0,
          ),
     new ListTile(
-      title: Text('Registeration'),
+      title: Text('Remarks'),
       leading: Icon(Icons.note),
       onTap: ()=> Navigator.push(context, MaterialPageRoute(
         builder: (BuildContext)=> Register(),
@@ -122,9 +122,9 @@ body: SingleChildScrollView(
     child: Container(
       padding: EdgeInsets.only(top: 300.0),
 
-      child: Text('Sweep',
+      child: Text('Environmental cleanliness begins with each individual desire to be clean',
       style: TextStyle(
-        fontSize: 30.0,
+        fontSize: 10.0,
       ),
       ),
     ),

@@ -16,7 +16,7 @@ class _CheckState extends State<Check>  with SingleTickerProviderStateMixin{
   void initState()
   {
     super.initState();
-    animationController = AnimationController(duration: Duration(seconds: 6), vsync: this);
+    animationController = AnimationController(duration: Duration(seconds: 3), vsync: this);
     animationController.forward();
     animationController.addStatusListener((listener){
 if(listener == AnimationStatus.completed){
@@ -36,16 +36,16 @@ builder: (BuildContext context)=> HomeScreen(),
         
         
         child: Container(
-          padding: EdgeInsets.only(left: 10.0),
-          alignment: Alignment.bottomCenter,
-         height:500,
-         width:500,
+          
+          
+         height:400,
+         width:400,
         
          
           child: FlareActor(
             
-            "assets/Checkbox.flr",
-            animation: "checkmark_appear",
+            "assets/Success Check.flr",
+            animation: "Untitled",
             
             fit: BoxFit.cover,
           ),

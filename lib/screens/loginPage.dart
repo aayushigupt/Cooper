@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'home.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class Test extends StatefulWidget
 {
   @override
@@ -15,6 +19,15 @@ class Test extends StatefulWidget
     String name,email,displayPicture,auth,googleSign;
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final GoogleSignIn googleSignIn = new GoogleSignIn();
+
+
+void getUID() async{
+  FirebaseUser user = await _auth.currentUser();
+  Firestore.instance.collection("users").add({
+    'userID' : user.uid
+  });
+}
+
   
    signInWithGoogle() async{
     final GoogleSignInAccount googleUser = await googleSignIn.signIn();
@@ -31,6 +44,7 @@ class Test extends StatefulWidget
 
 
   signInSilently() async {
+    
     var user = await googleSignIn.signInSilently();
     var name = user.displayName;
     var email = user.email;
@@ -55,14 +69,18 @@ class Test extends StatefulWidget
   
   Widget signInButton(){
     return new Container(
-  
+  width: 250,
+  height: 40.0,
 
       child: new RaisedButton(
+        color: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14.0)
+          borderRadius: BorderRadius.circular(30.0)
         ),
-color: Colors.blue,
+
+
         onPressed: () async {
+          getUID();
           var user = await signInWithGoogle();
           var name = user.displayName;
           var email = user.email;
@@ -81,41 +99,16 @@ color: Colors.blue,
             )
           );
         },
-        child: Container(
-       color: Colors.blue,
-
-          height:50,
-          width:190,
-          child: Form(
-            child: Row(
-              
-              children: <Widget>[
-                
-                Container(
-                 
-                  padding: EdgeInsets.only(left: 10.0),
-                                  child: Text('Sign with',
-                  
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
-                  
-                  ),
-                ),
-                
-                   Container(
-                       padding: EdgeInsets.only(left: 49.0),
-                     child: Image.asset("assets/google_logo.png",
-                       
-                       ),
-                     ),
-                
-
-              ],
-            ),
+      child: Row(
+        children: <Widget>[
+          Icon(FontAwesomeIcons.google, color: Color(0xffCE107C),),
+          SizedBox(width: 21.0,),
+          
+          Text('Sign in with Google',style: TextStyle(color: Colors.black,fontSize: 15.0)
+        
           )
-        ),
+        ]
+      ),
       ),
     );
   }
